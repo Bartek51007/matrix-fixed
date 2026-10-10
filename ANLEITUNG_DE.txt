@@ -1,0 +1,17 @@
+MATRIX RAIN – Galaxy Watch 7 (WFF v2) – APK über GitHub Actions bauen
+
+1. Neues GitHub-Repository anlegen (Public), leer.
+2. ALLE Dateien dieses Ordners hochladen, auch den Ordner ".github" (Datei: .github/workflows/build-apk.yml).
+   Alte Dateien im Repo vorher löschen oder überschreiben.
+3. Reiter "Actions" > "Build Watch Face APK" > "Run workflow". Dauer ca. 3-5 Minuten.
+4. Beim grünen Lauf unten unter "Artifacts": MatrixRain-GalaxyWatch7-apk herunterladen,
+   ZIP entpacken -> watchface-debug.apk.
+
+Installation per ADB:
+ Uhr: Einstellungen > Über die Uhr > Softwareinfo > 5x auf Softwareversion tippen
+ > Entwickleroptionen > ADB-Debugging + Debuggen über WLAN an (IP:Port notieren).
+ PC: adb connect IP:PORT
+     adb install watchface-debug.apk
+ Uhr: Zifferblatt lange drücken > "Matrix Rain" wählen, Berechtigungen erlauben.
+
+Hinweis: Strecke (KM) ist geschätzt = Schritte x 0,75 m.

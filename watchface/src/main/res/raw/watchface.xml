@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450" clipShape="CIRCLE">
+  <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+  <Metadata key="PREVIEW_TIME" value="18:54:32" />
+
+  <Scene backgroundColor="#FF000000">
+
+    <!-- Animierter Matrix-Ziffernregen (nicht im Ambient-Modus) -->
+    <PartAnimatedImage x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <AnimationController play="ON_VISIBLE" />
+      <AnimatedImage resource="matrix_rain" format="WEBP" />
+    </PartAnimatedImage>
+
+    <!-- Dunkles Band hinter der Uhr, Außenring, Ring-Hintergründe -->
+    <PartImage x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Image resource="frame" />
+    </PartImage>
+
+    <!-- Uhrzeit HH:mm:ss -->
+    <DigitalClock x="0" y="170" width="450" height="80">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <TimeText format="HH:mm:ss" hourFormat="SYNC_TO_DEVICE" x="0" y="0" width="450" height="80" align="CENTER">
+        <Font family="SYNC_TO_DEVICE" size="70" weight="BOLD" color="#6BFFAA" />
+      </TimeText>
+    </DigitalClock>
+
+    <!-- Ambient: HH:mm, gedimmt -->
+    <DigitalClock x="0" y="170" width="450" height="80" alpha="0">
+      <Variant mode="AMBIENT" target="alpha" value="255" />
+      <TimeText format="HH:mm" hourFormat="SYNC_TO_DEVICE" x="0" y="0" width="450" height="80" align="CENTER">
+        <Font family="SYNC_TO_DEVICE" size="76" weight="NORMAL" color="#2BB86A" />
+      </TimeText>
+    </DigitalClock>
+
+    <!-- Datum -->
+    <DigitalClock x="0" y="244" width="450" height="30">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <TimeText format="dd.MM.yyyy" x="0" y="0" width="450" height="30" align="CENTER">
+        <Font family="SYNC_TO_DEVICE" size="26" weight="NORMAL" color="#6BFFAA" />
+      </TimeText>
+    </DigitalClock>
+
+    <Group name="battery" x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Arc centerX="225" centerY="50" height="76" width="76" startAngle="0" endAngle="360" direction="CLOCKWISE">
+        <Transform target="endAngle" value="[BATTERY_PERCENT] * 3.6" />
+        <Stroke thickness="6" color="#2DFF7A" cap="ROUND" />
+      </Arc>
+      <PartText x="175" y="36" width="100" height="28">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#6BFFAA">
+            <Template>%d%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
+          </Font>
+        </Text>
+      </PartText>
+    </Group>
+
+    <Group name="steps" x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Arc centerX="135" centerY="355" height="76" width="76" startAngle="0" endAngle="360" direction="CLOCKWISE">
+        <Transform target="endAngle" value="min([STEP_COUNT] / [STEP_GOAL], 1) * 360" />
+        <Stroke thickness="6" color="#2DFF7A" cap="ROUND" />
+      </Arc>
+      <PartText x="90" y="334" width="90" height="28">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="21" weight="BOLD" color="#6BFFAA">
+            <Template>%d<Parameter expression="[STEP_COUNT]" /></Template>
+          </Font>
+        </Text>
+      </PartText>
+      <PartText x="90" y="358" width="90" height="18">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#6BFFAA">
+            <Template>SCHRITTE</Template>
+          </Font>
+        </Text>
+      </PartText>
+    </Group>
+
+    <Group name="heart" x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Arc centerX="225" centerY="355" height="76" width="76" startAngle="0" endAngle="360" direction="CLOCKWISE">
+        <Transform target="endAngle" value="min([HEART_RATE] / 200, 1) * 360" />
+        <Stroke thickness="6" color="#2DFF7A" cap="ROUND" />
+      </Arc>
+      <PartText x="180" y="334" width="90" height="28">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#6BFFAA">
+            <Template>%d<Parameter expression="[HEART_RATE]" /></Template>
+          </Font>
+        </Text>
+      </PartText>
+      <PartText x="180" y="358" width="90" height="18">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#6BFFAA">
+            <Template>BPM</Template>
+          </Font>
+        </Text>
+      </PartText>
+    </Group>
+
+    <Group name="distance" x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Arc centerX="315" centerY="355" height="76" width="76" startAngle="0" endAngle="360" direction="CLOCKWISE">
+        <Transform target="endAngle" value="min([STEP_COUNT] / [STEP_GOAL], 1) * 360" />
+        <Stroke thickness="6" color="#2DFF7A" cap="ROUND" />
+      </Arc>
+      <PartText x="270" y="334" width="90" height="28">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#6BFFAA">
+            <Template>%.1f<Parameter expression="[STEP_COUNT] * 0.00075" /></Template>
+          </Font>
+        </Text>
+      </PartText>
+      <PartText x="270" y="358" width="90" height="18">
+        <Text align="CENTER">
+          <Font family="SYNC_TO_DEVICE" size="13" weight="NORMAL" color="#6BFFAA">
+            <Template>KM</Template>
+          </Font>
+        </Text>
+      </PartText>
+    </Group>
+
+  </Scene>
+</WatchFace>
